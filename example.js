@@ -1,10 +1,20 @@
-var http = require('http');
+// Javascript version
+// Assumes usual installation through npm.
+var Router = require('node-simple-router')
+// Alternative: assumes router.js is located at the current working directory.
+//var Router = require('./router')
 
-http.createServer(function (req, res) {
-  res.writeHead(200, {'Content-Type': 'text/plain'});
-  res.end('Hello World!!!!!\n');
-}).listen(1337, '127.0.0.1');
+var http   = require('http')
 
-console.log('Server running at http://127.0.0.1:1337/');
+var router = Router();
 
+router.get('/', function (request, response) {
+  response.end('Home page');})
+
+router.get('/hello/:one/:two', function (request, response) {
+  response.end("Hello, " + request.params.one + request.params.two);})
+
+server = http.createServer(router)
+
+server.listen(3000)
 
